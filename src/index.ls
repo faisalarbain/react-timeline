@@ -1,19 +1,18 @@
-{div, script} = React.DOM
+{div} = React.DOM
 
 Timeline = React.createClass do
   getDefaultProps: -> do
-    id: 'timeline-embed'
+    embed_id: 'timeline-embed'
     source: null
-    width: 800
-    height: 600
+    width: '100%'
+    height: '600'
+    lang: 'en'
+    start_at_end: false
+    start_at_slide: false
+    start_zoom_adjust: 0
+    hash_bookmark: true
+    debug: false
   render: ->
-    div {id:@props.id}, null
-  componetDidMount: ->
-    script {src:'http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js'}, null
-    document.head.append script
-    createStoryJS do
-      type: 'timeline'
-      width: @props.width    
-      height: @props.height
-      source: @props.source
-      embed_id: @props.id
+    div {style:{width:@props.width, height:@props.height}, id:@props.embed_id}, null
+  componentDidMount: ->
+    createStoryJS @props
